@@ -11,7 +11,6 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { createPost } from "@/actions/post.action";
-import { UploadButton } from "@/lib/uploadthing";
 
 const CreatePosts = () => {
   const [content, setContent] = useState("");
@@ -52,20 +51,6 @@ const CreatePosts = () => {
               className="h-30"
               placeholder="Whats on your mind today?"
             />
-            { showImageUpload && 
-            <UploadButton
-              endpoint="imageUploader"
-              onClientUploadComplete={(res) => {
-                // Do something with the response
-                setImage(res[0].ufsUrl)
-                toast.success("Image uploaded")
-              }}
-              onUploadError={(error: Error) => {
-                // Do something with the error.
-                toast.error("Failed to upload image")
-              }}
-            />
-            }
           </div>
           <Separator className="my-5" />
           <div className="flex justify-between">
