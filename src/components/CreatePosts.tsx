@@ -11,11 +11,13 @@ import toast from "react-hot-toast";
 import { useState } from "react";
 import { useUser } from "@clerk/nextjs";
 import { createPost } from "@/actions/post.action";
+import { UploadButton } from "@/lib/uploadthing";
 
 const CreatePosts = () => {
   const [content, setContent] = useState("");
   const [image, setImage] = useState("");
   const [isPosting, setisPosting] = useState(false);
+  const [showImageUpload, setShowImageUpload] = useState(false);
 
   const { user } = useUser();
   if (!user) return null;
@@ -35,7 +37,7 @@ const CreatePosts = () => {
 
   return (
     <div className="">
-      <Card >
+      <Card>
         <CardContent>
           <div className="flex gap-5">
             <Avatar>
@@ -50,12 +52,30 @@ const CreatePosts = () => {
               className="h-30"
               placeholder="Whats on your mind today?"
             />
+            { showImageUpload && 
+            <UploadButton
+              endpoint="imageUploader"
+              onClientUploadComplete={(res) => {
+                // Do something with the response
+                setImage(res[0].ufsUrl)
+                toast.success("Image uploaded")
+              }}
+              onUploadError={(error: Error) => {
+                // Do something with the error.
+                toast.error("Failed to upload image")
+              }}
+            />
+            }
           </div>
           <Separator className="my-5" />
           <div className="flex justify-between">
-            <Button variant="ghost" className="flex gap-3" disabled={isPosting}>
+            <Button
+              onClick={() => setShowImageUpload((prev) => !prev)}
+              variant="ghost"
+              className="flex gap-3"
+              disabled={isPosting}
+            >
               <ImageIcon /> <p className="text-muted-foreground">Photo</p>
-              {/* will handle this later */}
             </Button>
             <Button
               onClick={handleSubmit}

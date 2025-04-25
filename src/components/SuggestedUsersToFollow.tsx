@@ -5,13 +5,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import Link from "next/link";
 
-const SuggestedUsersToFollow = async () => {
+const SuggestedUsersToFollow = async ({className}: {className: string}) => {
   const suggestedUsers = await getRandomUsersToFollow(3);
   console.log(suggestedUsers)
   if (suggestedUsers.length === 0) return null;
 
   return (
-    <Card className="sticky top-25">
+    <Card className={`sticky top-25 ${className}`}>
       <CardHeader>
         <CardTitle>Try Following</CardTitle>
       </CardHeader>
