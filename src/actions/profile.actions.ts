@@ -170,6 +170,6 @@ export const getIsFollowing = async (userId: string) => {
     return !!follow  // returns true if it returns an object, returns false if follow is null
   } catch (error) {
     console.log(`Error in getIsFollowing server action: ${error}`);
-    return { success: false, error: "Error fetching follow status" };
+    return false
   }
 };

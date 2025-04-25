@@ -28,7 +28,6 @@ import {
 } from "@/components/ui/alert-dialog";
 import { formatDistanceToNow } from "date-fns";
 import { motion, AnimatePresence } from "framer-motion";
-import { cp } from "fs";
 import Link from "next/link";
 
 type Posts = Awaited<ReturnType<typeof getPosts>>;
@@ -236,7 +235,13 @@ const PostCard = ({ post, dbUserId }: { post: Post; dbUserId: string }) => {
   );
 };
 
-const DeleteAlertPopup = ({ handlerFunction, postId, isDeleting }) => {
+type DeleteAlertPopupProps = {
+  handlerFunction: (postId: string) => void,
+  postId: string,
+  isDeleting: boolean
+}
+
+const DeleteAlertPopup = ({ handlerFunction, postId, isDeleting }: DeleteAlertPopupProps) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>

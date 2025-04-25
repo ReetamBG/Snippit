@@ -74,8 +74,6 @@ const NotificationCard = ({ notification }: { notification: Notification }) => {
             {notification.post.content}
           </div>
         )}
-        {/* NOTIFICATION CONTENT */}
-        <div className="ml-10">{notification.content}</div>
       </CardContent>
     </Card>
   );

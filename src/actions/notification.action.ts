@@ -6,10 +6,7 @@ import prisma from "@/lib/prisma";
 export const getAllNotifications = async () => {
   try {
     const myUserId = await getDbUserId();
-    if (!myUserId) {
-      console.log("Could not fetch userId in getAllNotifications");
-      return { success: false, error: "Could not fetch userId" };
-    }
+    if (!myUserId) throw new Error("Could not fetch userId in getAllNotifications");
 
     const notifications = await prisma.notification.findMany({
       where: { receiverId: myUserId },
@@ -43,10 +40,10 @@ export const getAllNotifications = async () => {
       orderBy: { createdAt: "desc" },
     });
 
-    return {success: true, notifications};
+    return notifications;
   } catch (error) {
     console.log(`Error in getAllNotifications server action: ${error}`);
-    return { success: false, error: "Could not fetch notifications" };
+    return []
   }
 };
 

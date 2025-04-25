@@ -29,7 +29,9 @@ const Sidebar = async () => {
   return <AuthenticatedSidebar user={user}/>;
 };
 
-const AuthenticatedSidebar = ({ user }) => {
+type User = NonNullable<Awaited<ReturnType<typeof getUserByClerkId>>>
+
+const AuthenticatedSidebar = ({ user }: {user: User}) => {
   return (
       <Card className="w-full p-5 sticky top-25">
         <CardHeader>
