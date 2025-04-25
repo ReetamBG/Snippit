@@ -76,7 +76,7 @@ const ProfilePageClient = ({
               <AvatarFallback>Avatar</AvatarFallback>
             </Avatar>
             <div className="flex flex-col gap-3">
-              <CardTitle className="text-center">{user.name}</CardTitle>
+              <CardTitle className="text-center sm:text-start">{user.name}</CardTitle>
               <CardDescription className="text-center sm:text-start">
                 <p>@{user.username}</p>
                 {user.bio && (
