@@ -1,6 +1,4 @@
-import { withUt } from "uploadthing/tw";
-
-export default withUt({
+export default {
   // Your existing Tailwind config
   content: ["./src/**/*.{ts,tsx,mdx}"]
-});
+};
