@@ -124,7 +124,7 @@ const PostCard = ({ post, dbUserId }: { post: Post; dbUserId: string }) => {
         {/* POST CONTENT */}
         <div className="bg-card p-5 rounded-md">
           {post.image && <img src={post.image} alt="image" />}
-          {post.content}
+          {post.content && <p className="mt-5">{post.content}</p>}
         </div>
         {/* LIKE AND COMMENT BUTTON */}
         <div className="flex gap-5">

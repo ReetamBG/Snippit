@@ -7,7 +7,6 @@ import Link from "next/link";
 
 const SuggestedUsersToFollow = async ({className}: {className: string}) => {
   const suggestedUsers = await getRandomUsersToFollow(3);
-  console.log(suggestedUsers)
   if (suggestedUsers.length === 0) return null;
 
   return (

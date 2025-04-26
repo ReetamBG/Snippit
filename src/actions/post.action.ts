@@ -3,17 +3,24 @@
 import prisma from "@/lib/prisma";
 import { getDbUserId } from "@/actions/user.action";
 import { revalidatePath } from "next/cache";
+import {cloudinary} from "@/lib/cloudinary";
 
-export const createPost = async (content: string, image: string) => {
+export const createPost = async (content: string | null, image: string | null) => {
   try {
     const userId = await getDbUserId();
     if (!userId) throw new Error("Error fetching userId");
+
+    let imageURL = null
+    if (image) {
+      const cloudinaryResponse = await cloudinary.uploader.upload(image);
+      imageURL = cloudinaryResponse.secure_url;
+    }
 
     await prisma.post.create({
       data: {
         authorId: userId,
         content: content,
-        image: image,
+        image: imageURL,
       },
     });
 
