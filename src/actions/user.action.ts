@@ -16,7 +16,6 @@ export const syncUser = async () => {
     });
 
     if (existingUser) {
-      revalidatePath("/");
       return existingUser;
     }
 
@@ -35,7 +34,6 @@ export const syncUser = async () => {
       },
     });
 
-    revalidatePath("/");
     return dbUser;
   } catch (error) {
     console.log(`Error in syncUser action: ${error}`);
