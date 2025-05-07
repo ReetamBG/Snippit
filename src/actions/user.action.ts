@@ -15,7 +15,10 @@ export const syncUser = async () => {
       where: { email: authUser.emailAddresses[0].emailAddress },
     });
 
-    if (existingUser) return existingUser;
+    if (existingUser) {
+      revalidatePath("/");
+      return existingUser;
+    }
 
     // save data in db
     const dbUser = await prisma.user.create({
@@ -32,6 +35,7 @@ export const syncUser = async () => {
       },
     });
 
+    revalidatePath("/");
     return dbUser;
   } catch (error) {
     console.log(`Error in syncUser action: ${error}`);
