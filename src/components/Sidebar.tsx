@@ -24,7 +24,7 @@ const Sidebar = async () => {
   if (!authUser) return <UnAuthenticatedSidebar />;
 
   const user = await getUserByClerkId(); // fetch db user from clerk id
-  if(!user) return null 
+  if(!user) return <UnAuthenticatedSidebar />
   
   return <AuthenticatedSidebar user={user}/>;
 };
